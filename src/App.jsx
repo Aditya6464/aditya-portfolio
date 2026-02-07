@@ -9,6 +9,7 @@ import PersistentNavigation from './components/PersistentNavigation';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import Experience from './components/Experience';
+import Employment from './components/Employment';
 import Skills from './components/Skills';
 import Tools from './components/Tools';
 import Education from './components/Education';
@@ -110,6 +111,7 @@ function App() {
         home: HomePage,
         about: AboutPage,
         experience: Experience,
+        employment: Employment,
         skills: Skills,
         tools: Tools,
         education: Education,

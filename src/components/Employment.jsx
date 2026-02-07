@@ -1,12 +1,24 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Employment = () => {
+    const [activeTab, setActiveTab] = useState(0);
+    const easeOut = [0.19, 1.0, 0.22, 1.0];
+
     const history = [
         {
             role: "Software Engineer",
-            company: "March Works Pvt Ltd",
+            company: "ADF data science",
             duration: "2024 – Present",
+            project: "Data Science Solutions",
+            desc: "Contributing to data-driven decision-making processes and building scalable backend services for data analysis.",
+            tech: "Python, Django, Flask, Pandas, NumPy, Git",
+            responsibilities: ["Backend development", "Data processing API design", "System optimization", "Collaboration with data scientists"]
+        },
+        {
+            role: "Software Engineer",
+            company: "March Works Pvt Ltd",
+            duration: "2024",
             project: "Marchtee",
             desc: "Commercial e-commerce application for a clothing brand handling products, carts, discounts, payments, and backstage inventory management.",
             tech: "Flask, SQLAlchemy, Jinja, HTML, CSS, JS, PostgreSQL, Git",
@@ -23,93 +35,227 @@ const Employment = () => {
         }
     ];
 
+    const current = history[activeTab];
+
     return (
-        <section id="employment" style={{
-            minHeight: '100vh',
-            padding: '4rem 2rem',
-            backgroundColor: 'var(--color-secondary)',
-            color: 'var(--color-primary)'
-        }}>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '3rem', textAlign: 'center', marginBottom: '4rem' }}>Employment History</h2>
+        <motion.section
+            id="employment"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '0 2rem',
+                backgroundColor: 'var(--color-bg-light)',
+                position: 'relative',
+                overflow: 'hidden'
+            }}
+        >
+            {/* Page Title */}
+            <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: easeOut, delay: 0.2 }}
+                style={{
+                    color: 'var(--color-text-primary)',
+                    fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                    letterSpacing: '-0.03em',
+                    lineHeight: 1,
+                    marginTop: '8vh',
+                    marginBottom: '0',
+                    textAlign: 'center',
+                    textTransform: 'uppercase'
+                }}
+            >
+                Employment
+            </motion.h1>
 
-            <div style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto' }}>
-                {/* Center Line */}
-                <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: '2px', background: 'var(--color-primary)', transform: 'translateX(-50%)' }} />
+            {/* Container for Tabs and Content - Pushed below Navigation (~40vh) */}
+            <div style={{
+                maxWidth: '1100px',
+                width: '100%',
+                marginTop: '35vh',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '3rem',
+                zIndex: 10
+            }}>
+                {/* Tabs Selector */}
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '2.5rem',
+                    flexWrap: 'wrap',
+                    borderBottom: '1px solid var(--color-border)',
+                    paddingBottom: '1rem'
+                }}>
+                    {history.map((item, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setActiveTab(index)}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                fontSize: '0.8rem',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.15em',
+                                color: activeTab === index ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                                transition: 'all 0.3s ease',
+                                padding: '0.5rem 1rem',
+                                position: 'relative',
+                                fontWeight: activeTab === index ? '600' : '400'
+                            }}
+                        >
+                            {item.company}
+                            {activeTab === index && (
+                                <motion.div
+                                    layoutId="activeTab"
+                                    style={{
+                                        position: 'absolute',
+                                        bottom: '-1rem',
+                                        left: 0,
+                                        right: 0,
+                                        height: '2px',
+                                        background: 'var(--color-text-primary)'
+                                    }}
+                                />
+                            )}
+                        </button>
+                    ))}
+                </div>
 
-                {history.map((item, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        style={{
-                            display: 'flex',
-                            justifyContent: index % 2 === 0 ? 'flex-end' : 'flex-start',
-                            marginBottom: '4rem',
-                            position: 'relative'
-                        }}
-                    >
-                        {/* Dot on timeline */}
-                        <div style={{
-                            position: 'absolute',
-                            left: '50%',
-                            top: '20px',
-                            width: '20px',
-                            height: '20px',
-                            background: 'var(--color-primary)',
-                            borderRadius: '50%',
-                            transform: 'translateX(-50%)',
-                            zIndex: 2
-                        }} />
+                {/* Details Content */}
+                <div style={{ minHeight: '350px' }}>
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.5, ease: easeOut }}
+                            style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'minmax(200px, 300px) 1fr',
+                                gap: '4rem'
+                            }}
+                        >
+                            {/* Left: Metadata */}
+                            <div>
+                                <h3 style={{
+                                    fontSize: '1.8rem',
+                                    fontWeight: '600',
+                                    color: 'var(--color-text-primary)',
+                                    marginBottom: '0.5rem',
+                                    lineHeight: 1.2
+                                }}>
+                                    {current.role}
+                                </h3>
+                                <p style={{
+                                    fontSize: '0.9rem',
+                                    color: 'var(--color-text-secondary)',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.1em',
+                                    marginBottom: '2rem'
+                                }}>
+                                    {current.duration}
+                                </p>
 
-                        <div style={{
-                            width: '45%',
-                            background: 'rgba(91, 14, 20, 0.05)',
-                            padding: '2rem',
-                            borderRadius: '8px',
-                            border: '1px solid var(--color-primary)'
-                        }}>
-                            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{item.role}</h3>
-                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{item.company} | {item.duration}</h4>
-                            <p><strong>Project:</strong> {item.project}</p>
-                            <p className="mt-2 text-sm">{item.desc}</p>
-                            <p className="mt-2 text-sm"><strong>Tech:</strong> {item.tech}</p>
-                            <ul style={{ listStyle: 'disc', marginLeft: '1.5rem', marginTop: '1rem' }}>
-                                {item.responsibilities.map((r, i) => <li key={i}>{r}</li>)}
-                            </ul>
-                        </div>
-                    </motion.div>
-                ))}
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                    <div>
+                                        <p style={{ fontSize: '0.65rem', textTransform: 'uppercase', opacity: 0.5, marginBottom: '0.5rem' }}>Project</p>
+                                        <p style={{ fontSize: '1rem', color: 'var(--color-text-primary)' }}>{current.project}</p>
+                                    </div>
+                                    <div>
+                                        <p style={{ fontSize: '0.65rem', textTransform: 'uppercase', opacity: 0.5, marginBottom: '0.5rem' }}>Tech Stack</p>
+                                        <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>{current.tech}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right: Responsibilities */}
+                            <div>
+                                <p style={{ fontSize: '0.65rem', textTransform: 'uppercase', opacity: 0.5, marginBottom: '1.5rem' }}>Overview & Responsibilities</p>
+                                <p style={{
+                                    fontSize: '1.1rem',
+                                    lineHeight: 1.6,
+                                    color: 'var(--color-text-secondary)',
+                                    marginBottom: '2rem'
+                                }}>
+                                    {current.desc}
+                                </p>
+                                <ul style={{
+                                    listStyle: 'none',
+                                    padding: 0,
+                                    display: 'grid',
+                                    gridTemplateColumns: '1fr 1fr',
+                                    gap: '1rem'
+                                }}>
+                                    {current.responsibilities.map((res, i) => (
+                                        <li key={i} style={{
+                                            fontSize: '0.9rem',
+                                            color: 'var(--color-text-secondary)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.7rem'
+                                        }}>
+                                            <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--color-text-primary)', opacity: 0.4 }} />
+                                            {res}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-                <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(91, 14, 20)" }}
-                    whileTap={{ scale: 0.95 }}
-                    style={{
-                        padding: '1rem 2rem',
-                        fontSize: '1.2rem',
-                        backgroundColor: 'var(--color-primary)',
-                        color: 'var(--color-secondary)',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: 'pointer',
-                        fontFamily: 'var(--font-body)'
-                    }}
+            {/* Resume Button - Aesthetic Placement */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                style={{
+                    position: 'absolute',
+                    bottom: '10vh',
+                    right: '5%'
+                }}
+            >
+                <button
                     onClick={() => {
-                        // Check if resume exists, else alert
                         const link = document.createElement('a');
-                        link.href = "/resume.pdf"; // Assumed path
+                        link.href = "/resume.pdf";
                         link.download = "Aditya_Lawate_Resume.pdf";
                         link.click();
                     }}
+                    style={{
+                        background: 'none',
+                        border: '1px solid var(--color-border)',
+                        color: 'var(--color-text-primary)',
+                        padding: '1rem 2rem',
+                        fontSize: '0.8rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.2em',
+                        cursor: 'pointer',
+                        borderRadius: '0',
+                        transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = 'var(--color-text-primary)';
+                        e.target.style.color = 'var(--color-bg-light)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = 'transparent';
+                        e.target.style.color = 'var(--color-text-primary)';
+                    }}
                 >
-                    ⬇ Download Resume
-                </motion.button>
-            </div>
-
-        </section>
+                    Download Resume
+                </button>
+            </motion.div>
+        </motion.section>
     );
 };
 

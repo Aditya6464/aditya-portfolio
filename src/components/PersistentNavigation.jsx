@@ -9,10 +9,11 @@ const PersistentNavigation = ({ onNavigate, currentPage }) => {
         { number: '01', name: 'About', id: 'about' },
         { number: '02', name: 'Biography', id: 'biography' },
         { number: '03', name: 'Experience', id: 'experience' },
-        { number: '04', name: 'Skills', id: 'skills' },
-        { number: '05', name: 'Tools', id: 'tools' },
-        { number: '06', name: 'Education', id: 'education' },
-        { number: '07', name: 'Contact', id: 'contact' },
+        { number: '04', name: 'Employment', id: 'employment' },
+        { number: '05', name: 'Skills', id: 'skills' },
+        { number: '06', name: 'Tools', id: 'tools' },
+        { number: '07', name: 'Education', id: 'education' },
+        { number: '08', name: 'Contact', id: 'contact' },
     ];
 
     return (
