@@ -128,7 +128,9 @@ function App() {
                     position: 'relative'
                 }}>
                     <AnimatePresence mode="wait">
-                        <CurrentPageComponent key={currentPage} />
+                        {!isInitialLoad && (
+                            <CurrentPageComponent key={currentPage} />
+                        )}
                     </AnimatePresence>
 
                     {/* Persistent navigation - positioned below title at 35vh */}
