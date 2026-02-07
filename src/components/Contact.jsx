@@ -11,20 +11,20 @@ const Contact = () => {
         {
             icon: Mail,
             label: "Email",
-            value: "aditya.lawate@example.com",
-            href: "mailto:aditya.lawate@example.com"
+            value: "adityalawate64@gmail.com",
+            href: "mailto:adityalawate64@gmail.com"
         },
         {
             icon: Phone,
             label: "Phone",
-            value: "+91 XXXXX XXXXX",
-            href: "tel:+91XXXXXXXXXX"
+            value: "+91 96898 36464 / 81809 94839",
+            href: "tel:+919689836464"
         },
         {
             icon: Linkedin,
             label: "LinkedIn",
-            value: "aditya-lawate",
-            href: "https://linkedin.com/in/aditya-lawate"
+            value: "adityalawate",
+            href: "https://www.linkedin.com/in/adityalawate"
         },
         {
             icon: Github,

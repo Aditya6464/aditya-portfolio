@@ -76,7 +76,7 @@ const AboutPage = () => {
                     color: 'var(--color-text-secondary)',
                     letterSpacing: '0.01em'
                 }}>
-                    A seasoned Python Developer with 2.5 years of experience in building
+                    A seasoned Python Developer with 3.5 years of experience in building
                     scalable web applications using Django and Flask. Strong expertise in
                     backend development, APIs, databases, and seamless frontend integration.
                 </p>

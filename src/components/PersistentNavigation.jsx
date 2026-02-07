@@ -7,11 +7,12 @@ const PersistentNavigation = ({ onNavigate, currentPage }) => {
     const navItems = [
         { number: '00', name: 'Home', id: 'home' },
         { number: '01', name: 'About', id: 'about' },
-        { number: '02', name: 'Experience', id: 'experience' },
-        { number: '03', name: 'Skills', id: 'skills' },
-        { number: '04', name: 'Tools', id: 'tools' },
-        { number: '05', name: 'Education', id: 'education' },
-        { number: '06', name: 'Contact', id: 'contact' },
+        { number: '02', name: 'Biography', id: 'biography' },
+        { number: '03', name: 'Experience', id: 'experience' },
+        { number: '04', name: 'Skills', id: 'skills' },
+        { number: '05', name: 'Tools', id: 'tools' },
+        { number: '06', name: 'Education', id: 'education' },
+        { number: '07', name: 'Contact', id: 'contact' },
     ];
 
     return (

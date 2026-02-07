@@ -12,6 +12,7 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Tools from './components/Tools';
 import Education from './components/Education';
+import Biography from './components/Biography';
 import Contact from './components/Contact';
 
 function App() {
@@ -112,6 +113,7 @@ function App() {
         skills: Skills,
         tools: Tools,
         education: Education,
+        biography: Biography,
         contact: Contact
     };
 
